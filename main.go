@@ -2,15 +2,11 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"strconv"
-	"time"
 )
 
 func main() {
-	start := time.Now()
-
 	var n, m, q int
 	fmt.Scanf("%d %d %d", &n, &m, &q)
 
@@ -47,15 +43,13 @@ func main() {
 
 		// fmt.Println(data_centers)
 	}
-
-	fmt.Println(time.Since(start))
 }
 
-func errorCheck(err error) {
-	if err != nil {
-		log.Fatalln(err)
-	}
-}
+// func errorCheck(err error) {
+// 	if err != nil {
+// 		log.Fatalln(err)
+// 	}
+// }
 
 func getmax(R []int, data_centers [][]bool) {
 	var max int
