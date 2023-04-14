@@ -2,13 +2,17 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 )
 
 func main() {
+	f_input, err := os.Open("input.txt")
+	errorCheck(err)
+
 	var n, m, q int
-	fmt.Scanf("%d %d %d", &n, &m, &q)
+	fmt.Fscanf(f_input, "%d %d %d", &n, &m, &q)
 
 	// initializing data_centers
 	DisabledServers := make([]bool, m)
@@ -21,17 +25,17 @@ func main() {
 	// running the commands
 	for k := 0; k < q; k++ {
 		var command string
-		fmt.Fscanf(os.Stdin, "%s", command)
+		fmt.Fscanf(f_input, "%s", command)
 
 		switch {
 		case command == "DISABLE":
 			var i, j int
-			fmt.Scanf("%d %d", &i, &j)
+			fmt.Fscanf(f_input, "%d %d", &i, &j)
 
 			data_centers[i-1][j-1] = true
 		case command == "RESET":
 			var i int
-			fmt.Scanf("%d", &i)
+			fmt.Fscanf(f_input, "%d", &i)
 
 			data_centers[i-1] = make([]bool, m)
 			R[i-1]++
@@ -45,11 +49,11 @@ func main() {
 	}
 }
 
-// func errorCheck(err error) {
-// 	if err != nil {
-// 		log.Fatalln(err)
-// 	}
-// }
+func errorCheck(err error) {
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
 
 func getmax(R []int, data_centers [][]bool) {
 	var max int
