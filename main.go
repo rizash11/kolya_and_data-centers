@@ -2,25 +2,24 @@ package main
 
 import (
 	"bufio"
-	"log"
 	"os"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	f_input, err := os.Open("input.txt")
-	errorCheck(err)
+	f_input, _ := os.Open("input.txt")
+	// errorCheck(err)
 	defer f_input.Close()
 
 	scanner := bufio.NewScanner(f_input)
 	scanner.Scan()
 
 	nmq := strings.Split(scanner.Text(), " ")
-	n, err := strconv.Atoi(nmq[0])
-	errorCheck(err)
-	m, err := strconv.Atoi(nmq[1])
-	errorCheck(err)
+	n, _ := strconv.Atoi(nmq[0])
+	// errorCheck(err)
+	m, _ := strconv.Atoi(nmq[1])
+	// errorCheck(err)
 	// q, err := strconv.Atoi(nmq[2])
 	// errorCheck(err)
 
@@ -33,8 +32,8 @@ func main() {
 	R := make([]int, n)
 
 	// running the commands
-	f_output, err := os.Create("output.txt")
-	errorCheck(err)
+	f_output, _ := os.Create("output.txt")
+	// errorCheck(err)
 	defer f_output.Close()
 	w := bufio.NewWriter(f_output)
 
@@ -43,15 +42,15 @@ func main() {
 
 		switch {
 		case command[0] == "DISABLE":
-			i, err := strconv.Atoi(command[1])
-			errorCheck(err)
-			j, err := strconv.Atoi(command[2])
-			errorCheck(err)
+			i, _ := strconv.Atoi(command[1])
+			// errorCheck(err)
+			j, _ := strconv.Atoi(command[2])
+			// errorCheck(err)
 
 			data_centers[i-1][j-1] = true
 		case command[0] == "RESET":
-			i, err := strconv.Atoi(command[1])
-			errorCheck(err)
+			i, _ := strconv.Atoi(command[1])
+			// errorCheck(err)
 
 			data_centers[i-1] = make([]bool, m)
 			R[i-1]++
@@ -67,11 +66,11 @@ func main() {
 	w.Flush()
 }
 
-func errorCheck(err error) {
-	if err != nil {
-		log.Fatalln(err)
-	}
-}
+// func errorCheck(err error) {
+// 	if err != nil {
+// 		log.Fatalln(err)
+// 	}
+// }
 
 func getmax(w *bufio.Writer, R []int, data_centers [][]bool) {
 	var max int
@@ -87,8 +86,8 @@ func getmax(w *bufio.Writer, R []int, data_centers [][]bool) {
 	}
 
 	output := strconv.Itoa(maxI) + "\n"
-	_, err := w.WriteString(output)
-	errorCheck(err)
+	w.WriteString(output)
+	// errorCheck(err)
 }
 
 func getmin(w *bufio.Writer, R []int, data_centers [][]bool) {
@@ -106,8 +105,8 @@ func getmin(w *bufio.Writer, R []int, data_centers [][]bool) {
 	}
 
 	output := strconv.Itoa(minI) + "\n"
-	_, err := w.WriteString(output)
-	errorCheck(err)
+	w.WriteString(output)
+	// errorCheck(err)
 }
 
 func running_servers(data_center []bool) int {
