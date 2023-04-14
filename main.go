@@ -26,6 +26,7 @@ func main() {
 	for k := 0; k < q; k++ {
 		var command string
 		fmt.Fscanf(f_input, "%s", command)
+		fmt.Println(command)
 
 		switch {
 		case command == "DISABLE":
