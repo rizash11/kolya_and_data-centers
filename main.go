@@ -1,29 +1,18 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"log"
 	"os"
 	"strconv"
-	"strings"
 	"time"
 )
 
 func main() {
 	start := time.Now()
 
-	f_input, err := os.Open("input.txt")
-	errorCheck(err)
-	defer f_input.Close()
-
-	scanner := bufio.NewScanner(f_input)
-	scanner.Scan()
-
-	nmq := strings.Split(scanner.Text(), " ")
-	n, err := strconv.Atoi(nmq[0])
-	errorCheck(err)
-	m, _ := strconv.Atoi(nmq[1])
+	var n, m, q int
+	fmt.Scanf("%d %d %d", &n, &m, &q)
 
 	// initializing data_centers
 	DisabledServers := make([]bool, m)
@@ -34,26 +23,25 @@ func main() {
 	R := make([]int, n)
 
 	// running the commands
-	for scanner.Scan() {
-		command := strings.Split(scanner.Text(), " ")
+	for k := 0; k < q; k++ {
+		var command string
+		fmt.Fscanf(os.Stdin, "%s", command)
 
 		switch {
-		case command[0] == "DISABLE":
-			i, err := strconv.Atoi(command[1])
-			errorCheck(err)
-			j, err := strconv.Atoi(command[2])
-			errorCheck(err)
+		case command == "DISABLE":
+			var i, j int
+			fmt.Scanf("%d %d", &i, &j)
 
 			data_centers[i-1][j-1] = true
-		case command[0] == "RESET":
-			i, err := strconv.Atoi(command[1])
-			errorCheck(err)
+		case command == "RESET":
+			var i int
+			fmt.Scanf("%d", &i)
 
 			data_centers[i-1] = make([]bool, m)
 			R[i-1]++
-		case command[0] == "GETMAX":
+		case command == "GETMAX":
 			getmax(R, data_centers)
-		case command[0] == "GETMIN":
+		case command == "GETMIN":
 			getmin(R, data_centers)
 		}
 
