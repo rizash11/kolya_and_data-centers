@@ -65,6 +65,8 @@ func main() {
 
 		// fmt.Println(data_centers)
 	}
+
+	w.Flush()
 }
 
 func errorCheck(err error) {
@@ -89,7 +91,6 @@ func getmax(w *bufio.Writer, R []int, data_centers [][]bool) {
 	output := strconv.Itoa(maxI) + "\n"
 	_, err := w.WriteString(output)
 	errorCheck(err)
-	w.Flush()
 }
 
 func getmin(w *bufio.Writer, R []int, data_centers [][]bool) {
@@ -109,7 +110,6 @@ func getmin(w *bufio.Writer, R []int, data_centers [][]bool) {
 	output := strconv.Itoa(minI) + "\n"
 	_, err := w.WriteString(output)
 	errorCheck(err)
-	w.Flush()
 }
 
 func running_servers(data_center []bool) int {
