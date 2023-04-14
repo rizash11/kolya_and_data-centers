@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -32,11 +33,6 @@ func main() {
 	R := make([]int, n)
 
 	// running the commands
-	f_output, _ := os.Create("output.txt")
-	// errorCheck(err)
-	defer f_output.Close()
-	w := bufio.NewWriter(f_output)
-
 	for scanner.Scan() {
 		command := strings.Split(scanner.Text(), " ")
 
@@ -55,15 +51,13 @@ func main() {
 			data_centers[i-1] = make([]bool, m)
 			R[i-1]++
 		case command[0] == "GETMAX":
-			getmax(w, R, data_centers)
+			getmax(R, data_centers)
 		case command[0] == "GETMIN":
-			getmin(w, R, data_centers)
+			getmin(R, data_centers)
 		}
 
 		// fmt.Println(data_centers)
 	}
-
-	w.Flush()
 }
 
 // func errorCheck(err error) {
@@ -72,7 +66,7 @@ func main() {
 // 	}
 // }
 
-func getmax(w *bufio.Writer, R []int, data_centers [][]bool) {
+func getmax(R []int, data_centers [][]bool) {
 	var max int
 	var maxI int
 
@@ -85,12 +79,11 @@ func getmax(w *bufio.Writer, R []int, data_centers [][]bool) {
 		}
 	}
 
-	output := strconv.Itoa(maxI) + "\n"
-	w.WriteString(output)
+	fmt.Println(strconv.Itoa(maxI))
 	// errorCheck(err)
 }
 
-func getmin(w *bufio.Writer, R []int, data_centers [][]bool) {
+func getmin(R []int, data_centers [][]bool) {
 
 	min := running_servers(data_centers[0]) * R[0]
 	var minI int
@@ -104,8 +97,7 @@ func getmin(w *bufio.Writer, R []int, data_centers [][]bool) {
 		}
 	}
 
-	output := strconv.Itoa(minI) + "\n"
-	w.WriteString(output)
+	fmt.Println(strconv.Itoa(minI))
 	// errorCheck(err)
 }
 
