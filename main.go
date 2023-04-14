@@ -21,11 +21,10 @@ func main() {
 	errorCheck(err)
 	m, err := strconv.Atoi(nmq[1])
 	errorCheck(err)
-	q, err := strconv.Atoi(nmq[2])
-	errorCheck(err)
+	// q, err := strconv.Atoi(nmq[2])
+	// errorCheck(err)
 
 	// initializing data_centers
-
 	DisabledServers := make([]bool, m)
 	data_centers := make([][]bool, n)
 	for i := range data_centers {
@@ -39,8 +38,7 @@ func main() {
 	defer f_output.Close()
 	w := bufio.NewWriter(f_output)
 
-	for k := 0; k < q; k++ {
-		scanner.Scan()
+	for scanner.Scan() {
 		command := strings.Split(scanner.Text(), " ")
 
 		switch {
