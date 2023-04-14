@@ -12,7 +12,7 @@ func main() {
 	errorCheck(err)
 
 	var n, m, q int
-	fmt.Fscanf(f_input, "%d %d %d", &n, &m, &q)
+	fmt.Fscanln(f_input, &n, &m, &q)
 
 	// initializing data_centers
 	DisabledServers := make([]bool, m)
@@ -25,8 +25,7 @@ func main() {
 	// running the commands
 	for k := 0; k < q; k++ {
 		var command string
-		fmt.Fscanf(f_input, "%s", command)
-		fmt.Println(command)
+		fmt.Fscanf(f_input, "%s", &command)
 
 		switch {
 		case command == "DISABLE":
